@@ -1,5 +1,3 @@
-import Provider, { createProvider } from './components/Provider'
-import connectAdvanced from './components/connectAdvanced'
-import connect from './connect/connect'
+import AsyncComponent from './components/AsyncComponent';
 
-export { Provider, createProvider, connectAdvanced, connect }
+export default {AsyncComponent}

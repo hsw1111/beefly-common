@@ -101,16 +101,18 @@
     "rollup-plugin-uglify": "^2.0.1"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
     "hoist-non-react-statics": "^2.2.1",
     "invariant": "^2.0.0",
+    "jeselvmo": "github:jeselvmo/jeselvmo",
+    "jquery": "^3.2.1",
     "lodash": "^4.2.0",
     "lodash-es": "^4.2.0",
     "loose-envify": "^1.1.0",
     "prop-types": "^15.5.10"
   },
   "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0-0 || ^16.0.0-0",
-    "redux": "^2.0.0 || ^3.0.0"
+    "react": "^0.14.0 || ^15.0.0-0 || ^16.0.0-0"
   },
   "browserify": {
     "transform": [
