@@ -8,3 +8,4 @@ lib
 .nyc_output
 coverage
 es
+package-lock.json
