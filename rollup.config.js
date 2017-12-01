@@ -9,17 +9,22 @@ const env = process.env.NODE_ENV
 const config = {
     entry: 'src/index.js',
     external: [
-        'react'
+        'react',
+        'jquery',
+        'classnames'
     ],
     globals: {
-        'react': 'React'
+        'react': 'React',
+        'jquery': 'jQuery',
+        'classnames': 'classNames'
     },
     format: 'umd',
     moduleName: 'BeeflyCommon',
     plugins: [
         nodeResolve(),
         babel({
-            exclude: '**/node_modules/**'
+            exclude: '**/node_modules/**',
+            presets: [['es2015', {modules: false}], 'stage-0', 'react']
         }),
         replace({
             'process.env.NODE_ENV': JSON.stringify(env)
@@ -32,10 +37,10 @@ if (env === 'production') {
     config.plugins.push(
         uglify({
             compress: {
-                pure_getters: true,
-                unsafe: true,
-                unsafe_comps: true,
-                warnings: false
+                // pure_getters: true,
+                // unsafe: true,
+                // unsafe_comps: true,
+                // warnings: false
             }
         })
     )
