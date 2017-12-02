@@ -1,6 +1,6 @@
 {
   "name": "beefly-common",
-  "version": "3.0.0",
+  "version": "0.0.1",
   "description": "beefly admin web common",
   "main": "./lib/index.js",
   "module": "es/index.js",
