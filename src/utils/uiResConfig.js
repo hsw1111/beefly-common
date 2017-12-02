@@ -6,7 +6,7 @@ const uiResConfig = {
     ],
 
     Map: [
-        'http://webapi.amap.com/maps?v=1.4.2&key=1fecbc9f8ffcde7f91a6413b371ceeb4&callback=init'
+        'http://webapi.amap.com/maps?v=1.4.2&key=1fecbc9f8ffcde7f91a6413b371ceeb4'
     ]
 
 };
