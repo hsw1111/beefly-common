@@ -11,7 +11,8 @@ import Map from './components/Map';
 import uiLoad from './utils/uiLoad';
 import uiResConfig from './utils/uiResConfig';
 
-export default {
-    asyncComponent, Box, Button, Content, DataTable, Form, Input, Modal, Map,
+export {
+    asyncComponent,
+    Box, Button, Content, DataTable, Form, Input, Modal, Map,
     uiLoad, uiResConfig
 }
