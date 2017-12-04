@@ -1,13 +1,10 @@
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
+import _extends from 'babel-runtime/helpers/extends';
+import _Object$assign from 'babel-runtime/core-js/object/assign';
+import _Object$getPrototypeOf from 'babel-runtime/core-js/object/get-prototype-of';
+import _classCallCheck from 'babel-runtime/helpers/classCallCheck';
+import _createClass from 'babel-runtime/helpers/createClass';
+import _possibleConstructorReturn from 'babel-runtime/helpers/possibleConstructorReturn';
+import _inherits from 'babel-runtime/helpers/inherits';
 import React from 'react';
 import $ from 'jquery';
 import uiLoad from "../utils/uiLoad";
@@ -20,7 +17,7 @@ var DataTable = function (_React$Component) {
     function DataTable(props) {
         _classCallCheck(this, DataTable);
 
-        var _this = _possibleConstructorReturn(this, (DataTable.__proto__ || Object.getPrototypeOf(DataTable)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (DataTable.__proto__ || _Object$getPrototypeOf(DataTable)).call(this, props));
 
         _this.defaultOptions = {
             language: {
@@ -60,7 +57,7 @@ var DataTable = function (_React$Component) {
         var columns = props.columns;
 
         _this.state = {
-            options: Object.assign({}, _this.defaultOptions, { columns: columns })
+            options: _Object$assign({}, _this.defaultOptions, { columns: columns })
         };
         return _this;
     }
@@ -68,7 +65,7 @@ var DataTable = function (_React$Component) {
     _createClass(DataTable, [{
         key: 'handlerProps',
         value: function handlerProps(props) {
-            var newProps = Object.assign({}, props);
+            var newProps = _Object$assign({}, props);
 
             if (newProps.columns) {
                 newProps.columns.forEach(function (c) {
