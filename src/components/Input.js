@@ -26,13 +26,13 @@ export default class Input extends React.Component {
         return this.state.value
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.value !== this.state.value) {
-            this.setState({
-                value: nextProps.value
-            });
-        }
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     if (nextProps.value !== this.state.value) {
+    //         this.setState({
+    //             value: nextProps.value
+    //         });
+    //     }
+    // }
 
 }
 

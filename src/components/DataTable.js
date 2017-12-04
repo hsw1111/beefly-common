@@ -2,13 +2,15 @@ import React from 'react';
 import $ from 'jquery';
 import uiLoad from "../utils/uiLoad";
 import uiResConfig from "../utils/uiResConfig";
+import {request} from 'jeselvmo';
 
 export default class DataTable extends React.Component {
+
 
     constructor(props) {
         super(props);
 
-        let defaultOptions = {
+        this.defaultOptions = {
             language: {
                 "sProcessing": "处理中...",
                 "sLengthMenu": "显示 _MENU_ 项结果",
@@ -40,22 +42,12 @@ export default class DataTable extends React.Component {
             ordering: false,
             pageLength: 10,
             dom: "tr<'row'<'col-sm-6'i><'col-sm-6'p>>",
-            drawCallback: function () {
-                let api = this.api();
-
-                // 添加序号列
-                let column = props.columns[0];
-                if (column && column.data == null && column.title == '序号') {
-                    let startIndex = api.context[0]._iDisplayStart;//获取到本页开始的条数
-                    api.column(0).nodes().each(function (cell, i) {
-                        cell.innerHTML = startIndex + i + 1;
-                    });
-                }
-            }
+            ajax: this.ajax.bind(this)
         };
 
+        let {columns} = props;
         this.state = {
-            options: Object.assign({}, defaultOptions, this.handlerProps(props))
+            options: Object.assign({}, this.defaultOptions, {columns}),
         }
     }
 
@@ -77,22 +69,49 @@ export default class DataTable extends React.Component {
 
     render() {
         return (
-            <table ref={(e) => this.dataTable = e} className="table table-striped table-bordered table-hover"/>
+            <table ref={(e) => this._dataTable = e} className="table table-striped table-bordered table-hover"/>
         )
     }
 
     componentDidMount() {
         uiLoad.load(uiResConfig.DataTable).then(() => {
-            this.refresh()
+            this.init()
         })
     }
 
-    shouldComponentUpdate() {
-        return false
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.query !== this.props.query;
     }
 
-    refresh() {
-        $(this.dataTable).dataTable(this.state.options);
+    componentDidUpdate() {
+        this.draw()
+    }
+
+    init() {
+        this.dataTable = $(this._dataTable).dataTable(this.state.options);
+    }
+
+    draw() {
+        this.dataTable.api().draw()
+    }
+
+    ajax(data, callback, settings) {
+        let {url, query} = this.props;
+
+        let params = {...query};
+
+        // 添加分页信息
+        params['pageNo'] = (data.start / data.length) + 1;
+        params['pageSize'] = data.length;
+
+        request.post(url, params)
+            .then((result) => {
+                let returnData = {};
+                returnData.data = result.data.data;
+                returnData.recordsTotal = result.data.totalCount;
+                returnData.recordsFiltered = result.data.totalCount;
+                callback(returnData);
+            })
     }
 }
 
@@ -121,15 +140,15 @@ export default class DataTable extends React.Component {
  */
 DataTable.propTypes = {
     columns: React.PropTypes.array,		// 设定列的所有初始属性
-    ajax: React.PropTypes.func,			// 数据请求
-    ordering: React.PropTypes.bool,		// 启用排序
-}
+    url: React.PropTypes.string,			// 数据请求接口
+    query: React.PropTypes.object,		// 启用排序
+};
 
 DataTable.defaultProps = {
     columns: [],
-    ajax: (data, callback, settings) => null,
-    ordering: false,
-}
+    url: '',
+    query: {},
+};
 
 
 
