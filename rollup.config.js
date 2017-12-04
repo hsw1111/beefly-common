@@ -24,7 +24,6 @@ const config = {
         nodeResolve(),
         babel({
             exclude: '**/node_modules/**',
-            presets: [['es2015', {modules: false}], 'stage-0', 'react']
         }),
         replace({
             'process.env.NODE_ENV': JSON.stringify(env)
