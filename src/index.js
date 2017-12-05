@@ -5,7 +5,7 @@ import Content from './components/Content';
 import DataTable from './components/DataTable';
 import Form from './components/Form';
 import Input from './components/Input';
-import Select from './components/Select';
+import Select from './components/Select';
 import Modal from './components/Modal';
 import Map from './components/Map';
 
