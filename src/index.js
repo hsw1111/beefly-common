@@ -5,14 +5,16 @@ import Content from './components/Content';
 import DataTable from './components/DataTable';
 import Form from './components/Form';
 import Input from './components/Input';
+import Select from './components/Select';
 import Modal from './components/Modal';
 import Map from './components/Map';
 
 import uiLoad from './utils/uiLoad';
 import uiResConfig from './utils/uiResConfig';
+import dtUtils from './utils/dtUtils';
 
 export {
     asyncComponent,
-    Box, Button, Content, DataTable, Form, Input, Modal, Map,
-    uiLoad, uiResConfig
+    Box, Button, Content, DataTable, Form, Input, Modal, Map, Select,
+    uiLoad, uiResConfig, dtUtils
 }
