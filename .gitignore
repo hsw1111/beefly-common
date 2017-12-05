@@ -8,4 +8,8 @@ coverage
 package-lock.json
 dist
 es
+<<<<<<< HEAD
+lib 
+=======
 lib
+>>>>>>> 695b03e3390924d9c5b3feae8becb96119067fee
