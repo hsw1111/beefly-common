@@ -2,10 +2,8 @@ import React from 'react';
 import $ from 'jquery';
 import uiLoad from "../utils/uiLoad";
 import uiResConfig from "../utils/uiResConfig";
-import {request} from 'jeselvmo';
 
 export default class DataTable extends React.Component {
-
 
     constructor(props) {
         super(props);
@@ -42,41 +40,48 @@ export default class DataTable extends React.Component {
             ordering: false,
             pageLength: 10,
             dom: "tr<'row'<'col-sm-6'i><'col-sm-6'p>>",
-            ajax: this.ajax.bind(this)
+            ajax: this
+                .ajax
+                .bind(this)
         };
 
         let {columns} = props;
         this.state = {
-            options: Object.assign({}, this.defaultOptions, {columns}),
+            options: Object.assign({}, this.defaultOptions, {columns})
         }
     }
-
 
     handlerProps(props) {
         let newProps = Object.assign({}, props);
 
         if (newProps.columns) {
-            newProps.columns.forEach((c) => {
-                if (c.data == null && c.render == null) { // 默认处理
-                    c.render = () => '';
-                } else if (c.data != null && c.render == null) {// 空值处理
-                    c.render = (data) => (data == null ? '' : data);
-                }
-            })
+            newProps
+                .columns
+                .forEach((c) => {
+                    if (c.data == null && c.render == null) { // 默认处理
+                        c.render = () => '';
+                    } else if (c.data != null && c.render == null) { // 空值处理
+                        c.render = (data) => (data == null
+                            ? ''
+                            : data);
+                    }
+                })
         }
         return newProps;
     }
 
     render() {
-        return (
-            <table ref={(e) => this._dataTable = e} className="table table-striped table-bordered table-hover"/>
-        )
+        return (<table
+            ref={(e) => this._dataTable = e}
+            className="table table-striped table-bordered table-hover"/>)
     }
 
     componentDidMount() {
-        uiLoad.load(uiResConfig.DataTable).then(() => {
-            this.init()
-        })
+        uiLoad
+            .load(uiResConfig.DataTable)
+            .then(() => {
+                this.init()
+            })
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -92,26 +97,24 @@ export default class DataTable extends React.Component {
     }
 
     draw() {
-        this.dataTable.api().draw()
+        this
+            .dataTable
+            .api()
+            .draw()
     }
 
     ajax(data, callback, settings) {
-        let {url, query} = this.props;
+        let {url, query, onAjax} = this.props;
 
-        let params = {...query};
+        let params = {
+            ...query
+        };
 
         // 添加分页信息
         params['pageNo'] = (data.start / data.length) + 1;
         params['pageSize'] = data.length;
 
-        request.post(url, params)
-            .then((result) => {
-                let returnData = {};
-                returnData.data = result.data.data;
-                returnData.recordsTotal = result.data.totalCount;
-                returnData.recordsFiltered = result.data.totalCount;
-                callback(returnData);
-            })
+        onAjax(url, params, callback);
     }
 }
 
@@ -139,18 +142,21 @@ export default class DataTable extends React.Component {
  * columnDefs 设置定义列的初始属性
  */
 DataTable.propTypes = {
-    columns: React.PropTypes.array,		// 设定列的所有初始属性
-    url: React.PropTypes.string,			// 数据请求接口
-    query: React.PropTypes.object,		// 启用排序
+    columns: React.PropTypes.array, // 设定列的所有初始属性
+    url: React.PropTypes.string, // 数据请求接口
+    query: React.PropTypes.object, // 启用排序
+    onAjax: React.PropTypes.func
 };
 
 DataTable.defaultProps = {
     columns: [],
     url: '',
     query: {},
+    onAjax: (url, params, callback) => {
+        let returnData = {};
+        returnData.data = [];
+        returnData.recordsTotal = 0;
+        returnData.recordsFiltered = 0;
+        callback(returnData);
+    }
 };
-
-
-
-
-
