@@ -1,6 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import { pinyin } from 'jeselvmo';
+import $ from 'jquery';
 
 const letterGroup = ['', 'ABCDE', 'FGHIJ', 'KLMNO', 'PQRST', 'UVWXYZ']
 
@@ -47,7 +48,7 @@ export default class CitySelect extends React.Component {
         let { activeCity, showBox } = this.state;
         let value = activeCity ? activeCity.cityName : '';
         return (
-            <div className="form-group cityselect">
+            <div ref="cityselect" className="form-group cityselect">
                 <label>{label && label + '：'}</label>
                 <span className="input-container">
                     <input type={type} className="form-control" placeholder={placeholder} value={value}
@@ -74,6 +75,17 @@ export default class CitySelect extends React.Component {
                 </div>
             </div>
         )
+    }
+
+    componentDidMount() {
+        // 单击区域之外关闭弹出层
+        $(document).on('click', (event) => {
+            if (!$.contains(this.refs.cityselect, event.target)) {
+                this.setState({
+                    showBox: false
+                })
+            }
+        });
     }
 
     clickInput() {
