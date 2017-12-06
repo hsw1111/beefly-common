@@ -8,6 +8,7 @@ import Input from './components/Input';
 import Select from './components/Select';
 import Modal from './components/Modal';
 import Map from './components/Map';
+import CitySelect from './components/CitySelect';
 
 import uiLoad from './utils/uiLoad';
 import uiResConfig from './utils/uiResConfig';
@@ -15,6 +16,6 @@ import dtUtils from './utils/dtUtils';
 
 export {
     asyncComponent,
-    Box, Button, Content, DataTable, Form, Input, Modal, Map, Select,
+    Box, Button, Content, DataTable, Form, Input, Modal, Map, Select, CitySelect,
     uiLoad, uiResConfig, dtUtils
 }
