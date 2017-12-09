@@ -40,14 +40,12 @@ export default class DataTable extends React.Component {
             ordering: false,
             pageLength: 10,
             dom: "tr<'row'<'col-sm-6'i><'col-sm-6'p>>",
-            ajax: this
-                .ajax
-                .bind(this)
+            ajax: this.ajax.bind(this)
         };
 
-        let {columns} = props;
+        let { columns } = props;
         this.state = {
-            options: Object.assign({}, this.defaultOptions, {columns})
+            options: Object.assign({}, this.defaultOptions, { columns })
         }
     }
 
@@ -73,7 +71,7 @@ export default class DataTable extends React.Component {
     render() {
         return (<table
             ref={(e) => this._dataTable = e}
-            className="table table-striped table-bordered table-hover"/>)
+            className="table table-striped table-bordered table-hover" />)
     }
 
     componentDidMount() {
@@ -97,14 +95,11 @@ export default class DataTable extends React.Component {
     }
 
     draw() {
-        this
-            .dataTable
-            .api()
-            .draw()
+        this.dataTable.api().draw()
     }
 
     ajax(data, callback, settings) {
-        let {url, query, onAjax} = this.props;
+        let { url, query, onAjax } = this.props;
 
         let params = {
             ...query
