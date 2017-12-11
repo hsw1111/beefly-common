@@ -1,4 +1,4 @@
-import { dateUtils } from "jeselvmo";
+import { dateUtils, numberUtils } from "jeselvmo";
 
 /**
  * DataTable列渲染
@@ -112,6 +112,10 @@ const dtUtils = {
 		return `<div class="link-actions">
 			${actions.map((act) => renderli(act)).join('\n')}
 		</div>`;
+	},
+
+	renderNumber(data, pattern) {
+		return numberUtils.format(data, pattern)
 	}
 
 };

@@ -30,15 +30,7 @@
     "es"
   ],
   "keywords": [
-    "react",
-    "reactjs",
-    "hot",
-    "reload",
-    "hmr",
-    "live",
-    "edit",
-    "flux",
-    "redux"
+    "react"
   ],
   "author": "keke yang <kecoyo@163.com> (http://github.com/kecoyo)",
   "license": "MIT",
@@ -82,7 +74,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "jeselvmo": "^1.0.4",
+    "jeselvmo": "^1.0.6",
     "jquery": "^3.2.1",
     "react": "^15.6.2"
   },
