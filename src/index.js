@@ -8,6 +8,7 @@ import Input from './components/Input';
 import Select from './components/Select';
 import Modal from './components/Modal';
 import Map from './components/Map';
+import MapCity from './components/MapCity';
 import CitySelect from './components/CitySelect';
 import DateRange from './components/DateRange';
 import NumberRange from './components/NumberRange';
@@ -19,6 +20,6 @@ import dtUtils from './utils/dtUtils';
 
 export {
     asyncComponent,
-    Box, Button, Content, DataTable, Form, Input, Modal, Map, Select, CitySelect, DateRange, NumberRange,SelectInput,
+    Box, Button, Content, DataTable, Form, Input, Modal, Map, MapCity, Select, CitySelect, DateRange, NumberRange,SelectInput,
     uiLoad, uiResConfig, dtUtils
 }

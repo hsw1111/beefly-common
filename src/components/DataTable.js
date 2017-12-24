@@ -99,7 +99,7 @@ export default class DataTable extends React.Component {
     }
 
     ajax(data, callback, settings) {
-        let { url, query, onAjax } = this.props;
+        let { url, api, query, onAjax } = this.props;
 
         let params = {
             ...query
@@ -109,7 +109,7 @@ export default class DataTable extends React.Component {
         params['pageNo'] = (data.start / data.length) + 1;
         params['pageSize'] = data.length;
 
-        onAjax(url, params, callback);
+        onAjax(api || url || null, params, callback);
     }
 }
 
@@ -138,16 +138,18 @@ export default class DataTable extends React.Component {
  */
 DataTable.propTypes = {
     columns: React.PropTypes.array, // 设定列的所有初始属性
-    url: React.PropTypes.string, // 数据请求接口
+    url: React.PropTypes.string, // 数据请求接口url
+    api: React.PropTypes.func,  // 数据请求接口
     query: React.PropTypes.object, // 启用排序
     onAjax: React.PropTypes.func
 };
 
 DataTable.defaultProps = {
     columns: [],
-    url: '',
+    url: null,
+    api: null,
     query: {},
-    onAjax: (url, params, callback) => {
+    onAjax: (api, params, callback) => {
         let returnData = {};
         returnData.data = [];
         returnData.recordsTotal = 0;
