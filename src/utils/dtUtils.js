@@ -78,7 +78,7 @@ const dtUtils = {
 			if (act == '-') {
 				return ``
 			}
-			return `<button type="button" class="btn btn-primary" onclick="${act.onclick}">${act.text}</button>`
+			return `<button type="button" class="btn btn-primary btn-sm" onclick="${act.onclick}">${act.text}</button>`
 		}
 
 		return `<div class="btn-group11">
