@@ -13,13 +13,16 @@ import CitySelect from './components/CitySelect';
 import DateRange from './components/DateRange';
 import NumberRange from './components/NumberRange';
 import SelectInput from './components/SelectInput';
+import Details from './components/Details';
 
 import uiLoad from './utils/uiLoad';
 import uiResConfig from './utils/uiResConfig';
 import dtUtils from './utils/dtUtils';
+import utils from './utils/utils';
 
 export {
     asyncComponent,
     Box, Button, Content, DataTable, Form, Input, Modal, Map, MapCity, Select, CitySelect, DateRange, NumberRange,SelectInput,
-    uiLoad, uiResConfig, dtUtils
+    Details,
+    uiLoad, uiResConfig, dtUtils, utils
 }
