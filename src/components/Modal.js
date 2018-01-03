@@ -25,11 +25,11 @@ export default class Modal extends React.Component {
                             {children}
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-outline" onClick={this.onHide.bind(this)}>
-                                确定
+                            <button type="button" className="btn btn-default" data-dismiss="modal">
+                                取消
                             </button>
-                            <button type="button" className="btn btn-outline" data-dismiss="modal">
-                                关闭
+                            <button type="button" className="btn btn-primary" onClick={this.onHide.bind(this)}>
+                                确定
                             </button>
                         </div>
                     </div>
@@ -59,7 +59,11 @@ export default class Modal extends React.Component {
     }
 
     onHide() {
-        $(this._modal).modal('hide')
+        let {onOk} = this.props;
+        if(onOk){
+            onOk()
+        }
+        // $(this._modal).modal('hide')
     }
 }
 

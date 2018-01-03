@@ -5,9 +5,26 @@ const utils = {
 
     // 添加Tab页
     addTab(tab) {
-        parent.beefly.addTab(tab)
+        if(parent && parent.beefly && parent.beefly.addTab){
+            parent.beefly.addTab(tab)
+        }else{
+            // 带参数
+            var queryString = '';
+            if (tab.params) {
+                var params = tab.params;
+                var paramsArray = [];
+                for (var key in params) {
+                    paramsArray.push(key + '=' + encodeURIComponent(params[key]));
+                }
+                if (paramsArray.length > 0)
+                    queryString = '?' + paramsArray.join('&');
+            }
+            var url = `index.html${queryString}#${tab.path}`;
+            window.open(url)
+        }
     },
 
+    // 提示弹框
     alert() {
         let option = {};
         if (arguments.length > 0) {
@@ -31,6 +48,7 @@ const utils = {
         window.bootbox.alert(opt);
     },
 
+    // 确认弹框
     confirm() {
         let option = {};
         if (arguments.length > 0) {
@@ -62,6 +80,39 @@ const utils = {
         }, option);
 
         window.bootbox.confirm(opt);
+    },
+
+    // 对话框
+    dialog(option){
+        
+        let opt = Object.assign({}, {
+			title: '订单详情',
+			message: `<iframe src='index.html#${option.path}' width='100%' height='${option.height || 300}' frameborder='0'></iframe>`,
+			size: 'large',
+			buttons: {
+				cancel: {
+					label: "cancel",
+					className: 'btn-danger',
+					callback: function () {
+					}
+				},
+				ok: {
+					label: "ok",
+					className: 'btn-info',
+					callback: function () {
+					}
+				}
+			}
+        }, option);
+        
+        var dialog = window.bootbox.dialog(opt)
+
+        dialog.init(function(){
+            setTimeout(()=> {
+                dialog.beefly = dialog.find('iframe')[0].contentWindow.beefly
+            }, 2000);
+        })
+        return dialog
     }
 
 };
