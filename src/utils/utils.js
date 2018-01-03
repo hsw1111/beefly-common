@@ -5,9 +5,9 @@ const utils = {
 
     // 添加Tab页
     addTab(tab) {
-        if(parent && parent.beefly && parent.beefly.addTab){
+        if (parent && parent.beefly && parent.beefly.addTab) {
             parent.beefly.addTab(tab)
-        }else{
+        } else {
             // 带参数
             var queryString = '';
             if (tab.params) {
@@ -83,32 +83,32 @@ const utils = {
     },
 
     // 对话框
-    dialog(option){
-        
+    dialog(option) {
+
         let opt = Object.assign({}, {
-			title: '订单详情',
-			message: `<iframe src='index.html#${option.path}' width='100%' height='${option.height || 300}' frameborder='0'></iframe>`,
-			size: 'large',
-			buttons: {
-				cancel: {
-					label: "cancel",
-					className: 'btn-danger',
-					callback: function () {
-					}
-				},
-				ok: {
-					label: "ok",
-					className: 'btn-info',
-					callback: function () {
-					}
-				}
-			}
+            title: '订单详情',
+            message: `<iframe src='index.html#${option.path}' width='100%' height='${option.height || 300}' frameborder='0'></iframe>`,
+            size: 'large',
+            buttons: {
+                cancel: {
+                    label: "cancel",
+                    className: 'btn-danger',
+                    callback: function () {
+                    }
+                },
+                ok: {
+                    label: "ok",
+                    className: 'btn-info',
+                    callback: function () {
+                    }
+                }
+            }
         }, option);
-        
+
         var dialog = window.bootbox.dialog(opt)
 
-        dialog.init(function(){
-            setTimeout(()=> {
+        dialog.init(function () {
+            setTimeout(() => {
                 dialog.beefly = dialog.find('iframe')[0].contentWindow.beefly
             }, 2000);
         })
