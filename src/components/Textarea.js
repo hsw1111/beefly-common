@@ -2,30 +2,34 @@ import React from 'react';
 
 export default class Textarea extends React.Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            value: props.value
-        }
+    componentWillMount(){
+        this.owner = this._reactInternalInstance._currentElement._owner._instance;
     }
 
     render() {
-        let {type, placeholder, label, rows} = this.props;
-        let {value} = this.state;
+        let {type, placeholder, label, rows, model, value} = this.props;
+        if(model){
+            value = this.owner.state[model];
+        }
         return (
             <div className="form-group">
                 <label>{label && label + '：'}</label>
                 <textarea type={type} className="form-control" rows={rows} placeholder={placeholder} value={value}
-                       onChange={(e) => this.setState({value: e.target.value})}/>
+                        onChange={(e) => this.handleChange(e)}/>
             </div>
         )
     }
 
-    get value() {
-        return this.state.value
+    handleChange(e){
+        let {model, onChange} = this.props;
+        if(model){
+            let newState = {};
+            newState[model] = e.target.value;
+            this.owner.setState(newState)
+        }else{
+            onChange && onChange(e)
+        }
     }
-
 }
 
 Textarea.propTypes = {
@@ -39,8 +43,8 @@ Textarea.propTypes = {
 Textarea.defaultProps = {
     type: 'text',
     label: '',
-    value: '',
     placeholder: '',
     rows: 3,
+    value: '',
 };
 
