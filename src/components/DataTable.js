@@ -43,9 +43,9 @@ export default class DataTable extends React.Component {
             ajax: this.ajax.bind(this)
         };
 
-        let { columns } = props;
+        let {columns} = props;
         this.state = {
-            options: Object.assign({}, this.defaultOptions, { columns })
+            options: Object.assign({}, this.defaultOptions, {columns})
         }
     }
 
@@ -71,7 +71,7 @@ export default class DataTable extends React.Component {
     render() {
         return (<table
             ref={(e) => this._dataTable = e}
-            className="table table-striped table-bordered table-hover" />)
+            className="table table-striped table-bordered table-hover"/>)
     }
 
     componentDidMount() {
@@ -99,17 +99,13 @@ export default class DataTable extends React.Component {
     }
 
     ajax(data, callback, settings) {
-        let { url, api, query, onAjax } = this.props;
+        let {url, api, query, onAjax} = this.props;
 
         let params = {
             ...query
         };
 
-        // 添加分页信息
-        params['pageNo'] = (data.start / data.length) + 1;
-        params['pageSize'] = data.length;
-
-        onAjax(api || url || null, params, callback);
+        onAjax(api || url || null, params, data, callback, settings);
     }
 }
 
