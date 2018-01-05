@@ -1,4 +1,5 @@
 import React from 'react';
+import modelUtils from '../utils/modelUtils';
 
 export default class Textarea extends React.Component {
 
@@ -9,7 +10,7 @@ export default class Textarea extends React.Component {
     render() {
         let {type, placeholder, label, rows, model, value} = this.props;
         if(model){
-            value = this.owner.state[model];
+            value = modelUtils.getStateValue(this.owner, model);
         }
         return (
             <div className="form-group">
@@ -23,12 +24,9 @@ export default class Textarea extends React.Component {
     handleChange(e){
         let {model, onChange} = this.props;
         if(model){
-            let newState = {};
-            newState[model] = e.target.value;
-            this.owner.setState(newState)
-        }else{
-            onChange && onChange(e)
+            modelUtils.setStateValue(this.owner, model, e.target.value);
         }
+        onChange && onChange(e)
     }
 }
 
@@ -38,6 +36,9 @@ Textarea.propTypes = {
     value: React.PropTypes.string,
     placeholder: React.PropTypes.string,
     rows: React.PropTypes.number,
+    
+    model: React.PropTypes.string,          // 数据绑定
+    onChange: React.PropTypes.func,         //
 };
 
 Textarea.defaultProps = {

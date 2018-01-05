@@ -1,4 +1,5 @@
 import React from 'react';
+import modelUtils from '../utils/modelUtils';
 import _ from 'lodash';
 
 /**
@@ -22,44 +23,52 @@ export default class SelectInput extends React.Component {
         }
 
         this.state = {
-            selectOptions,
-            selectValue,
-            inputValue: props.inputValue,
+            selectOptions
         }
 
     }
 
+    componentWillMount() {
+        this.owner = this._reactInternalInstance._currentElement._owner._instance;
+    }
+
     render() {
-        let { label, placeholder } = this.props;
-        let { selectOptions, selectValue, inputValue } = this.state;
+        let { label, placeholder, selectValue, inputValue, model } = this.props;
+        let { selectOptions } = this.state;
+        if (model) {
+            let stateValues = modelUtils.getStateValues(this.owner, model);
+            selectValue = stateValues[0];
+            inputValue = stateValues[1];
+        }
         return (
             <div className="form-group select-input">
                 <label>{label && label + '：'}</label>
-                <select className="form-control" value={selectValue} onChange={(e) => this.setState({ selectValue: e.target.value })}>
+                <select className="form-control" value={selectValue} onChange={this.handleSelectChange.bind(this)}>
                     {selectOptions.map((op) => (
                         <option key={op.value} value={op.value}>{op.text}</option>
                     ))}
                 </select>
                 <input type="text" className="form-control" placeholder={placeholder} value={inputValue}
-                    onChange={(e) => this.setState({ inputValue: e.target.value })} />
+                    onChange={this.handleInputChange.bind(this)} />
             </div>
         )
     }
 
-    get selectValue() {
-        return this.state.selectValue
+    handleSelectChange(e) {
+        let { model, onSelectChange } = this.props;
+        if (model) {
+            modelUtils.setStateValues(this.owner, model, [e.target.value])
+        }
+        onSelectChange && onSelectChange(e)
     }
 
-    get selectText() {
-        let { selectOptions, selectValue } = this.state;
-        let active = _.find(selectOptions, (o) => o.value == selectValue);
-        return active ? active.text : ''
+    handleInputChange(e) {
+        let { model, onInputChange } = this.props;
+        if (model) {
+            modelUtils.setStateValues(this.owner, model, [null, e.target.value])
+        }
+        onInputChange && onInputChange(e)
     }
-
-    get inputValue() {
-        return this.state.inputValue
-    }
-
 }
 
 SelectInput.propTypes = {
@@ -68,6 +77,10 @@ SelectInput.propTypes = {
     selectOptions: React.PropTypes.object,
     selectValue: React.PropTypes.string,
     inputValue: React.PropTypes.string,
+
+    model: React.PropTypes.string,          // 数据绑定
+    onSelectChange: React.PropTypes.func,   //
+    onInputChange: React.PropTypes.func,    //
 };
 
 SelectInput.defaultProps = {

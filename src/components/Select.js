@@ -1,4 +1,5 @@
 import React from 'react';
+import modelUtils from '../utils/modelUtils';
 import _ from 'lodash';
 
 export default class Select extends React.Component {
@@ -6,7 +7,7 @@ export default class Select extends React.Component {
     constructor(props) {
         super(props);
 
-        let options = [], value = props.value;
+        let options = [];
         if (typeof props.options == 'object') {
             _.forEach(props.options, (text, value) => options.push({ text, value }))
         }
@@ -15,27 +16,25 @@ export default class Select extends React.Component {
             options.unshift(props.wholeOption)
         }
 
-        if (options.length > 0) {
-            let active = _.find(options, (o) => o.value == value);
-            if (!active) {
-                value = options[0].value
-            }
-        }
-
         this.state = {
-            options,
-            value
+            options
         }
     }
 
-    render() {
-        let { label } = this.props;
-        let { options, value } = this.state;
+    componentWillMount() {
+        this.owner = this._reactInternalInstance._currentElement._owner._instance;
+    }
 
+    render() {
+        let { label, model, value } = this.props;
+        let { options } = this.state;
+        if (model) {
+            value = modelUtils.getStateValue(this.owner, model);
+        }
         return (
             <div className="form-group">
                 <label>{label && label + '：'}</label>
-                <select className="form-control" value={value} onChange={(e) => this.setState({ value: e.target.value })}>
+                <select className="form-control" value={value} onChange={this.handleChange.bind(this)}>
                     {options.map((op) => (
                         <option key={op.value} value={op.value}>{op.text}</option>
                     ))}
@@ -44,14 +43,12 @@ export default class Select extends React.Component {
         )
     }
 
-    get value() {
-        return this.state.value
-    }
-
-    get text() {
-        let { options, value } = this.state;
-        let active = _.find(options, (o) => o.value == value);
-        return active ? active.text : ''
+    handleChange(e) {
+        let { model, onChange } = this.props;
+        if (model) {
+            modelUtils.setStateValue(this.owner, model, e.target.value)
+        }
+        onChange && onChange(e)
     }
 
 }
@@ -62,6 +59,9 @@ Select.propTypes = {
     value: React.PropTypes.string,      // 选中的value
     whole: React.PropTypes.bool,        // 显示全部
     wholeOption: React.PropTypes.object,    // 自定义全部option
+
+    model: React.PropTypes.string,          // 数据绑定
+    onChange: React.PropTypes.func,         //
 };
 
 Select.defaultProps = {

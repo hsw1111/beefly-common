@@ -43,10 +43,13 @@ export default class DataTable extends React.Component {
             ajax: this.ajax.bind(this)
         };
 
-        let {columns} = props;
-        this.state = {
-            options: Object.assign({}, this.defaultOptions, {columns})
-        }
+        // DataTable配置
+        this.options = Object.assign({}, this.defaultOptions, {
+            columns: props.columns
+        });
+
+        // 查询条件
+        this.query = props.query;
     }
 
     handlerProps(props) {
@@ -69,29 +72,27 @@ export default class DataTable extends React.Component {
     }
 
     render() {
-        return (<table
-            ref={(e) => this._dataTable = e}
-            className="table table-striped table-bordered table-hover"/>)
+        return (
+            <table ref={(e) => this._dataTable = e} className="table table-striped table-bordered table-hover" />
+        )
+    }
+
+    shouldComponentUpdate() {
+        return false
     }
 
     componentDidMount() {
-        uiLoad
-            .load(uiResConfig.DataTable)
-            .then(() => {
-                this.init()
-            })
+        uiLoad.load(uiResConfig.DataTable).then(() => {
+            this.init()
+        })
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.query !== this.props.query;
+    init() {
+        this.dataTable = $(this._dataTable).dataTable(this.options);
     }
 
     componentDidUpdate() {
         this.draw()
-    }
-
-    init() {
-        this.dataTable = $(this._dataTable).dataTable(this.state.options);
     }
 
     draw() {
@@ -99,13 +100,15 @@ export default class DataTable extends React.Component {
     }
 
     ajax(data, callback, settings) {
-        let {url, api, query, onAjax} = this.props;
+        let { api, onAjax } = this.props;
+        let params = this.query;
+        onAjax(api, params, data, callback, settings);
+    }
 
-        let params = {
-            ...query
-        };
-
-        onAjax(api || url || null, params, data, callback, settings);
+    // 查询
+    search(query) {
+        this.query = query;
+        this.draw();
     }
 }
 
