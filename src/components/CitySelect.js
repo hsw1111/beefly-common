@@ -14,16 +14,22 @@ export default class CitySelect extends React.Component {
     constructor(props) {
         super(props);
 
-        let citysGroup = this.buildCitysGroup(props.citys);// 城市分组
+        let citys = props.citys.slice(0);
+
+        // 加全国
+        if (props.whole) {
+            citys.unshift(props.wholeCity);
+        }
 
         this.state = {
-            citysGroup,
+            citys, // 城市列表
+            citysGroup: this.toCitysGroup(citys),// 城市分组
+            cityMap: this.toCityMap(citys),// 城市字典
             showBox: false, // 显示弹框 
-            cityMap: 
         }
     }
 
-    buildCitysGroup(citys) {
+    toCitysGroup(citys) {
         let citysGroup = {};
 
         // 首字母分组
@@ -42,11 +48,12 @@ export default class CitySelect extends React.Component {
         return citysGroup
     }
 
-    toCityMap(citys){
+    toCityMap(citys) {
         let map = {};
         _.forEach(citys, (c) => {
             map[c.cityCode] = c;
         });
+        return map;
     }
 
     componentWillMount() {
@@ -55,18 +62,18 @@ export default class CitySelect extends React.Component {
 
     render() {
         let { type, placeholder, label, whole, cityCode, cityName, model } = this.props;
-        let { showBox } = this.state;
-        
-        if(model){
+        let { showBox, cityMap } = this.state;
+
+        if (model) {
             let stateValues = modelUtils.getStateValues(this.owner, model);
             cityCode = stateValues[0];
-            if(stateValues.length > 1){
+            if (stateValues.length > 1) {
                 cityName = stateValues[1];
             }
         }
 
-        if(cityName){
-            cityName = this.getCityName(cityCode);
+        if (!cityName) {
+            cityName = cityMap[cityCode].cityName;
         }
 
         return (
@@ -136,11 +143,6 @@ export default class CitySelect extends React.Component {
         }
     }
 
-    getCityName(cityCode){
-        let {citysGroup} = this.state;
-        let activeCity = _.find(citys, (c) => c.cityCode == defaultValue || c.cityName == defaultValue); // 默认选中
-    }
-
 }
 
 CitySelect.propTypes = {
@@ -149,6 +151,9 @@ CitySelect.propTypes = {
     citys: React.PropTypes.func,
     whole: React.PropTypes.bool,
     wholeCity: React.PropTypes.object,
+
+    model: React.PropTypes.string,          // 数据绑定
+    onChange: React.PropTypes.func,         //
 };
 
 CitySelect.defaultProps = {
