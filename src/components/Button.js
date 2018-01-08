@@ -4,16 +4,14 @@ import cs from 'classnames';
 export default class Button extends React.Component {
 
     render() {
-        let { theme, size, icon, block, flat, onClick, children } = this.props;
+        let { theme, size, icon, block, flat, onClick, value, children, margin } = this.props;
 
         return (
-            <div className="form-group">
-                <button type="button"
-                    className={cs('btn', { [`btn-${theme}`]: theme, [`btn-${size}`]: size, 'btn-block': block, 'btn-flat': flat })} onClick={onClick}>
-                    {icon && <i className={cs('ace-icon', 'fa', 'bigger-110', 'fa-' + icon)}></i>}
-                    &nbsp;{children}&nbsp;
-                </button>
-            </div>
+            <button type="button"
+                className={cs('btn', { [`btn-${theme}`]: theme, [`btn-${size}`]: size, 'btn-block': block, 'btn-flat': flat, 'margin-r-5': margin })} onClick={onClick}>
+                {icon && <i className={cs('ace-icon', 'fa', 'bigger-110', 'fa-' + icon)}></i>}
+                &nbsp;{children || value}&nbsp;
+            </button>
         )
     }
 
@@ -27,6 +25,8 @@ Button.propTypes = {
     block: React.PropTypes.bool,
     flat: React.PropTypes.bool,
     onClick: React.PropTypes.func,
+    value: React.PropTypes.string,
+    margin: React.PropTypes.bool,       // 是否添加'margin-r-5'
 }
 
 Button.defaultProps = {

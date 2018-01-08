@@ -1,47 +1,33 @@
 import React from 'react';
 import modelUtils from '../utils/modelUtils';
-import cs from 'classnames';
 
-export default class Input extends React.Component {
+export default class Text extends React.Component {
 
     componentWillMount() {
         this.owner = this._reactInternalInstance._currentElement._owner._instance;
     }
 
     render() {
-        let {type, placeholder, label, value, model, width, className, inputCls} = this.props;
+        let {label, value, model} = this.props;
+
+        // 数据绑定
         if (model) {
             value = modelUtils.getStateValue(this.owner, model);
         }
 
-        // input样式
-        let inputStyle = {};
-        if(width){
-            inputStyle.width = width;
-        }
-
         return (
-            <div className={cs("form-group", className)}>
+            <div className="form-group">
                 <label className="col-sm-2 control-label">{label && label + '：'}</label>
                 <div className="col-sm-10">
-                    <input type={type} className={cs("form-control", inputCls)} placeholder={placeholder} value={value}
-                        onChange={(e) => this.setState({value: e.target.value})} style={inputStyle}/>
+                    <div className="form-control-text">{value}</div>
                 </div>
             </div>
         )
     }
 
-    handleChange(e) {
-        let { model, onChange } = this.props;
-        if (model) {
-            modelUtils.setStateValue(this.owner, model, e.target.value)
-        }
-        onChange && onChange(e)
-    }
-
 }
 
-Input.propTypes = {
+Text.propTypes = {
     type: React.PropTypes.string,
     label: React.PropTypes.string,
     value: React.PropTypes.string,
@@ -51,10 +37,9 @@ Input.propTypes = {
     onChange: React.PropTypes.func,         //
 
     width: React.PropTypes.object,
-    className: React.PropTypes.string,      // 样式class
 };
 
-Input.defaultProps = {
+Text.defaultProps = {
     type: 'text',
     label: '',
     value: '',
