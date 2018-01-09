@@ -1,9 +1,10 @@
 import React from 'react';
 import cs from 'classnames'
+import modelUtils from '../utils/modelUtils';
 
 export default class Tabs extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -11,16 +12,12 @@ export default class Tabs extends React.Component {
         }
     }
 
-    render() {
-        return (
-            <div className="nav-tabs-custom">
-                {this.renderNav()}
-                {this.renderContent()}
-            </div>
-        )
+    componentWillMount() {
+        this.owner = this._reactInternalInstance._currentElement._owner._instance;
     }
-    renderNav() {
-        let { children } = this.props;
+
+    render() {
+        let { children, model } = this.props;
         let tabs = [];
         React.Children.forEach(children, (child) => {
             const cType = child.type;
@@ -29,15 +26,26 @@ export default class Tabs extends React.Component {
             }
         });
 
-        let {tabIndex} = this.state;
+        let { tabIndex } = this.state;
+        // 数据绑定
+        if (model) {
+            tabIndex = modelUtils.getStateValue(this.owner, model);
+        }
+        return (
+            <div className="nav-tabs-custom">
+                {this.renderNav(tabs, tabIndex)}
+                {this.renderContent(tabs, tabIndex)}
+            </div>
+        )
+    }
+    renderNav(tabs, tabIndex) {
         return (
             <ul className="nav nav-tabs">
                 {tabs.map((t, i) => {
-                    // console.log(t)
                     let title = t.props.title;
                     return (
-                        <li key={title} className={cs({'active': tabIndex == i})}>
-                            <a href="javascript:" onClick={()=>this.switchTab(i)}>{title}</a>
+                        <li key={title} className={cs({ 'active': tabIndex == i })}>
+                            <a href="javascript:" onClick={() => this.switchTab(i)}>{title}</a>
                         </li>
                     )
                 })}
@@ -45,23 +53,13 @@ export default class Tabs extends React.Component {
         )
     }
 
-    renderContent() {
-        let { children } = this.props;
-        let tabs = [];
-        React.Children.forEach(children, (child) => {
-            const cType = child.type;
-            if (typeof cType === 'function' && cType.name == 'Tab') {
-                tabs.push(child);
-            }
-        });
-
-        let {tabIndex} = this.state;
+    renderContent(tabs, tabIndex) {
         return (
             <div className="tab-content">
                 {tabs.map((t, i) => {
                     let title = t.props.title;
                     return (
-                        <div key={title} className={cs("tab-pane", {"active": tabIndex == i})}>
+                        <div key={title} className={cs("tab-pane", { "active": tabIndex == i })}>
                             {t.props.children}
                         </div>
                     )
@@ -70,14 +68,22 @@ export default class Tabs extends React.Component {
         )
     }
 
-    switchTab(index){
-        this.setState({
-            tabIndex: index
-        })
+    switchTab(index) {
+        let { model, onChange } = this.props;
+        if (model) {
+            modelUtils.setStateValue(this.owner, model, index)
+        }else{
+            this.setState({
+                tabIndex: index
+            });
+        }
+        onChange && onChange(index)
     }
 }
 
 Tabs.propTypes = {
+    model: React.PropTypes.string,          // 数据绑定
+    onChange: React.PropTypes.func,         //
 }
 
 Tabs.defaultProps = {

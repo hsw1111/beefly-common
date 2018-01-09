@@ -8,7 +8,7 @@ export default class Text extends React.Component {
     }
 
     render() {
-        let {label, value, model} = this.props;
+        let { label, value, model } = this.props;
 
         // 数据绑定
         if (model) {
@@ -28,22 +28,11 @@ export default class Text extends React.Component {
 }
 
 Text.propTypes = {
-    type: React.PropTypes.string,
     label: React.PropTypes.string,
     value: React.PropTypes.string,
-    placeholder: React.PropTypes.string,
-
     model: React.PropTypes.string,          // 数据绑定
-    onChange: React.PropTypes.func,         //
-
-    width: React.PropTypes.object,
 };
 
 Text.defaultProps = {
-    type: 'text',
-    label: '',
-    value: '',
-    placeholder: '',
-    width: null,
 };
 

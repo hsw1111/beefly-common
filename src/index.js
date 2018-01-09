@@ -18,6 +18,7 @@ import Textarea from './components/Textarea';
 import Tabs from './components/Tabs';
 import Tab from './components/Tab';
 import Text from './components/Text';
+import Field from './components/Field';
 
 import uiLoad from './utils/uiLoad';
 import uiResConfig from './utils/uiResConfig';
@@ -27,6 +28,6 @@ import utils from './utils/utils';
 export {
     asyncComponent,
     Box, Button, Content, DataTable, Form, Input, Modal, Map, MapCity, Select, CitySelect, DateRange, NumberRange, SelectInput,
-    Details, Textarea, Tabs, Tab, Text,
+    Details, Textarea, Tabs, Tab, Text, Field,
     uiLoad, uiResConfig, dtUtils, utils
 }

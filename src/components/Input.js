@@ -10,6 +10,7 @@ export default class Input extends React.Component {
 
     render() {
         let {type, placeholder, label, value, model, width, className, inputCls} = this.props;
+
         if (model) {
             value = modelUtils.getStateValue(this.owner, model);
         }
@@ -25,7 +26,7 @@ export default class Input extends React.Component {
                 <label className="col-sm-2 control-label">{label && label + '：'}</label>
                 <div className="col-sm-10">
                     <input type={type} className={cs("form-control", inputCls)} placeholder={placeholder} value={value}
-                        onChange={(e) => this.setState({value: e.target.value})} style={inputStyle}/>
+                        onChange={(e) => this.handleChange(e)} style={inputStyle}/>
                 </div>
             </div>
         )
