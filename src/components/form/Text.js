@@ -12,7 +12,7 @@ export default class Text extends Component {
         }
 
         return (
-            <FormGroup typeName={'text'} {...this.props}>
+            <FormGroup {...this.props}>
                 {value}
             </FormGroup>
         )
@@ -21,8 +21,12 @@ export default class Text extends Component {
 }
 
 Text.propTypes = {
+    ...FormGroup.propTypes,
     value: React.PropTypes.string,
 };
 
-Text.defaultProps = {};
+Text.defaultProps = {
+    ...FormGroup.defaultProps,
+    typeName: 'text',
+};
 

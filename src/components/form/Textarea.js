@@ -18,7 +18,7 @@ export default class Textarea extends Component {
         }
 
         return (
-            <FormGroup typeName={'textarea'} {...this.props}>
+            <FormGroup {...this.props}>
                 <textarea className="form-control" rows={rows} placeholder={placeholder} value={value}
                           onChange={(e) => this.handleChange(e)} style={inputStyle}/>
             </FormGroup>
@@ -43,6 +43,7 @@ Textarea.propTypes = {
 
 Textarea.defaultProps = {
     ...FormGroup.defaultProps,
+    typeName: 'textarea',
     value: '',
     placeholder: '',
     rows: 3,

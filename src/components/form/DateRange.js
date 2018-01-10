@@ -15,7 +15,7 @@ export default class DateRange extends Component {
             endDate = stateValues[1];
         }
         return (
-            <FormGroup typeName={'date-range'} {...this.props}>
+            <FormGroup {...this.props}>
                 <input type="date" className="form-control" value={startDate}
                        onChange={this.handleStartDateChange.bind(this)}/>
                 <span className="to">至</span>
@@ -44,11 +44,14 @@ export default class DateRange extends Component {
 }
 
 DateRange.propTypes = {
+    ...FormGroup.propTypes,
     startDate: React.PropTypes.string,
     endDate: React.PropTypes.string,
 };
 
 DateRange.defaultProps = {
+    ...FormGroup.defaultProps,
+    typeName: 'date-range',
     startDate: '', //'2017-07-19'
     endDate: ''
 };

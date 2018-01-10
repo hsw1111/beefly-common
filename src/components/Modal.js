@@ -35,11 +35,11 @@ export default class Modal extends React.Component {
     }
 
     render() {
-        let {theme, title, children} = this.props;
+        let {theme, title, size, children} = this.props;
 
         return (
             <div ref={(e) => this._modal = e} className={cs('modal', 'modal-' + theme, 'fade')}>
-                <div className="modal-dialog">
+                <div className={cs("modal-dialog", `modal-${size}`)}>
                     <div className="modal-content">
                         <div className="modal-header">
                             <button type="button" className="close" onClick={this.cancel.bind(this)}>
@@ -112,31 +112,31 @@ export default class Modal extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if (this.props.show !== nextProps.show) {
-            if(nextProps.show){
+            if (nextProps.show) {
                 this.show()
-            }else{
+            } else {
                 this.hide();
             }
         }
     }
 
-    ok(){
-        let {onOk, onHide}= this.props;
-        if(onOk){
+    ok() {
+        let {onOk, onHide} = this.props;
+        if (onOk) {
             onOk();
-        }else{
-            if(onHide){
+        } else {
+            if (onHide) {
                 onHide()
             }
         }
     }
 
-    cancel(){
-        let {onCancel, onHide}= this.props;
-        if(onCancel){
+    cancel() {
+        let {onCancel, onHide} = this.props;
+        if (onCancel) {
             onCancel();
-        }else{
-            if(onHide){
+        } else {
+            if (onHide) {
                 onHide()
             }
         }

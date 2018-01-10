@@ -24,6 +24,15 @@ const utils = {
         }
     },
 
+    // 关闭当前Tab页
+    closeTab() {
+        if (parent && parent.beefly && parent.beefly.closeTab) {
+            parent.beefly.closeTab()
+        } else {
+            window.close()
+        }
+    },
+
     // 提示弹框
     alert() {
         let option = {};

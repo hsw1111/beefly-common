@@ -15,7 +15,7 @@ export default class NumberRange extends Component {
             endNumber = stateValues[1];
         }
         return (
-            <FormGroup typeName={'number-range'} {...this.props}>
+            <FormGroup {...this.props}>
                 <input type="number" className="form-control" value={startNumber} min={min} max={max} step={step}
                        onChange={this.handleStartNumberChange.bind(this)}/>
                 <span className="to">至</span>
@@ -44,6 +44,7 @@ export default class NumberRange extends Component {
 }
 
 NumberRange.propTypes = {
+    ...FormGroup.propTypes,
     startNumber: React.PropTypes.number,
     endNumber: React.PropTypes.number,
     min: React.PropTypes.number,
@@ -52,6 +53,8 @@ NumberRange.propTypes = {
 };
 
 NumberRange.defaultProps = {
+    ...FormGroup.defaultProps,
+    typeName: 'number-range',
     startNumber: '',
     endNumber: '',
     min: 0,

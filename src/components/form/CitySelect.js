@@ -74,7 +74,7 @@ export default class CitySelect extends Component {
         }
 
         return (
-            <FormGroup typeName={'city-select'} {...this.props}>
+            <FormGroup {...this.props}>
                 <div ref={(e) => this._cityselect = e} className="cityselect">
                     <input type="text" className="form-control" placeholder={placeholder} value={cityName}
                            onClick={this.clickInput.bind(this)}/>
@@ -143,6 +143,7 @@ export default class CitySelect extends Component {
 }
 
 CitySelect.propTypes = {
+    ...FormGroup.propTypes,
     placeholder: React.PropTypes.string,
     citys: React.PropTypes.func,
     whole: React.PropTypes.bool,
@@ -150,6 +151,8 @@ CitySelect.propTypes = {
 };
 
 CitySelect.defaultProps = {
+    ...FormGroup.defaultProps,
+    typeName: 'city-select',
     placeholder: '请选择',
     citys: [{"cityName": "北京市", "cityCode": 110100}, {
         "cityId": 11,

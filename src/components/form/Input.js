@@ -19,7 +19,7 @@ export default class Input extends Component {
         }
 
         return (
-            <FormGroup typeName={'input'} {...this.props}>
+            <FormGroup {...this.props}>
                 <input type={type} className="form-control" placeholder={placeholder} value={value}
                        onChange={(e) => this.handleChange(e)} style={inputStyle}/>
             </FormGroup>
@@ -46,6 +46,7 @@ Input.propTypes = {
 
 Input.defaultProps = {
     ...FormGroup.defaultProps,
+    typeName: 'input',
     type: 'text',
     value: '',
     placeholder: '',

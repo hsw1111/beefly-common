@@ -1,6 +1,6 @@
 import asyncComponent from './components/asyncComponent';
 import Box from './components/Box';
-import Button from './components/form/Button';
+import Button from './components/Button';
 import Content from './components/Content';
 import DataTable from './components/DataTable';
 import Form from './components/form/Form';
@@ -18,7 +18,7 @@ import Textarea from './components/form/Textarea';
 import Tabs from './components/Tabs';
 import Tab from './components/Tab';
 import Text from './components/form/Text';
-import Field from './components/form/FormGroup';
+import Field from './components/form/Field';
 import Checkbox from './components/form/Checkbox';
 
 import uiLoad from './utils/uiLoad';

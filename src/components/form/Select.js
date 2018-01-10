@@ -29,7 +29,7 @@ export default class Select extends Component {
             value = this.getOwnerStateValue(model);
         }
         return (
-            <FormGroup typeName={'select'} {...this.props}>
+            <FormGroup {...this.props}>
                 <select className="form-control" value={value} onChange={this.handleChange.bind(this)}>
                     {options.map((op) => (
                         <option key={op.value} value={op.value}>{op.text}</option>
@@ -50,6 +50,7 @@ export default class Select extends Component {
 }
 
 Select.propTypes = {
+    ...FormGroup.propTypes,
     options: React.PropTypes.object,    // 所有option，可是map，或array
     value: React.PropTypes.string,      // 选中的value
     whole: React.PropTypes.bool,        // 显示全部
@@ -57,6 +58,8 @@ Select.propTypes = {
 };
 
 Select.defaultProps = {
+    ...FormGroup.defaultProps,
+    typeName: 'select',
     value: '',
     options: {},
     whole: true,

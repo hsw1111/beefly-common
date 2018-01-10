@@ -15,7 +15,7 @@ export default class Checkbox extends Component {
         }
 
         return (
-            <FormGroup typeName={'checkbox'} {...this.props}>
+            <FormGroup {...this.props}>
                 <label>
                     <input type="checkbox" checked={checked} value={value}
                            onChange={(e) => this.handleChange(e)}/>{text}
@@ -35,9 +35,13 @@ export default class Checkbox extends Component {
 }
 
 Checkbox.propTypes = {
+    ...FormGroup.propTypes,
     value: React.PropTypes.string,          // input value
     text: React.PropTypes.string,           // input after text
 };
 
-Checkbox.defaultProps = {};
+Checkbox.defaultProps = {
+    ...FormGroup.defaultProps,
+    typeName: 'checkbox',
+};
 

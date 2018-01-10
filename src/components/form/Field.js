@@ -10,7 +10,7 @@ export default class Field extends Component {
     render() {
         let {children} = this.props;
         return (
-            <FormGroup typeName={'field'} {...this.props}>
+            <FormGroup {...this.props}>
                 {children}
             </FormGroup>
         )
@@ -24,5 +24,6 @@ Field.propTypes = {
 
 Field.defaultProps = {
     ...FormGroup.defaultProps,
+    typeName: 'field',
 };
 

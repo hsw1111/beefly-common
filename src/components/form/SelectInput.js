@@ -38,7 +38,7 @@ export default class SelectInput extends Component {
             inputValue = stateValues[1];
         }
         return (
-            <FormGroup typeName={'select-input'} {...this.props}>
+            <FormGroup {...this.props}>
                 <select className="form-control" value={selectValue} onChange={this.handleSelectChange.bind(this)}>
                     {selectOptions.map((op) => (
                         <option key={op.value} value={op.value}>{op.text}</option>
@@ -68,6 +68,7 @@ export default class SelectInput extends Component {
 }
 
 SelectInput.propTypes = {
+    ...FormGroup.propTypes,
     placeholder: React.PropTypes.string,
     selectOptions: React.PropTypes.object,
     selectValue: React.PropTypes.string,
@@ -75,6 +76,8 @@ SelectInput.propTypes = {
 };
 
 SelectInput.defaultProps = {
+    ...FormGroup.defaultProps,
+    typeName: 'select-input',
     placeholder: '',
     selectOptions: {},
     selectValue: '',
