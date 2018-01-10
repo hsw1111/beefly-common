@@ -1,17 +1,27 @@
 import React from 'react';
 import cs from 'classnames';
+import FormGroup from "./FormGroup";
+import Component from "./Component";
 
-export default class Button extends React.Component {
+export default class Button extends Component {
 
     render() {
-        let { theme, size, icon, block, flat, onClick, value, children, margin } = this.props;
+        let {theme, size, icon, block, flat, onClick, value, children, margin} = this.props;
 
         return (
-            <button type="button"
-                className={cs('btn', { [`btn-${theme}`]: theme, [`btn-${size}`]: size, 'btn-block': block, 'btn-flat': flat, 'margin-r-5': margin })} onClick={onClick}>
-                {icon && <i className={cs('ace-icon', 'fa', 'bigger-110', 'fa-' + icon)}></i>}
-                &nbsp;{children || value}&nbsp;
-            </button>
+            <FormGroup typeName={'button'} {...this.props}>
+                <button type="button"
+                        className={cs('btn', {
+                            [`btn-${theme}`]: theme,
+                            [`btn-${size}`]: size,
+                            'btn-block': block,
+                            'btn-flat': flat,
+                            'margin-r-5': margin
+                        })} onClick={onClick}>
+                    {icon && <i className={cs('ace-icon', 'fa', 'bigger-110', 'fa-' + icon)}></i>}
+                    &nbsp;{children || value}&nbsp;
+                </button>
+            </FormGroup>
         )
     }
 
