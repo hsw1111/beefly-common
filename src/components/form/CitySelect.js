@@ -75,7 +75,7 @@ export default class CitySelect extends Component {
 
         return (
             <FormGroup typeName={'city-select'} {...this.props} ref={(e) => this._cityselect = e}>
-                <span className="input-container">
+                <span className="input-container cityselect">
                 <input type="text" className="form-control" placeholder={placeholder} value={cityName}
                        onClick={this.clickInput.bind(this)}/>
                     {showBox && <div className="cityselect-box">
