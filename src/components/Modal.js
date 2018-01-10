@@ -1,5 +1,6 @@
 import React from 'react';
 import cs from 'classnames';
+import Button from "./Button";
 
 class ModalBody extends React.Component {
 
@@ -93,12 +94,8 @@ export default class Modal extends React.Component {
         } else {
             return (
                 <Modal.Footer>
-                    <button type="button" className="btn btn-default" onClick={this.cancel.bind(this)}>
-                        取消
-                    </button>
-                    <button type="button" className="btn btn-primary" onClick={this.ok.bind(this)}>
-                        确定
-                    </button>
+                    <Button theme={'default'} value="取消" onClick={this.cancel.bind(this)}/>
+                    <Button value="确定" onClick={this.ok.bind(this)}/>
                 </Modal.Footer>
             );
         }
