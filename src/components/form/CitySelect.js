@@ -74,14 +74,14 @@ export default class CitySelect extends Component {
         }
 
         return (
-            <FormGroup typeName={'city-select'} {...this.props} ref={(e) => this._cityselect = e}>
-                <span className="input-container cityselect">
-                <input type="text" className="form-control" placeholder={placeholder} value={cityName}
-                       onClick={this.clickInput.bind(this)}/>
+            <FormGroup typeName={'city-select'} {...this.props}>
+                <div ref={(e) => this._cityselect = e} className="cityselect">
+                    <input type="text" className="form-control" placeholder={placeholder} value={cityName}
+                           onClick={this.clickInput.bind(this)}/>
                     {showBox && <div className="cityselect-box">
                         {letterGroup.map((group) => (!whole && group == '') ? null : this.renderGroup(group))}
                     </div>}
-                </span>
+                </div>
             </FormGroup>
         )
     }
@@ -117,6 +117,7 @@ export default class CitySelect extends Component {
     }
 
     clickCity(city) {
+        console.log('city:', city)
         this.setState({
             showBox: false
         })

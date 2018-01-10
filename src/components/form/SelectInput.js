@@ -53,7 +53,7 @@ export default class SelectInput extends Component {
     handleSelectChange(e) {
         let {model, onSelectChange} = this.props;
         if (model) {
-            this.setOwnerStateValues(this.owner, model, [e.target.value])
+            this.setOwnerStateValues(model, [e.target.value])
         }
         onSelectChange && onSelectChange(e)
     }
@@ -61,7 +61,7 @@ export default class SelectInput extends Component {
     handleInputChange(e) {
         let {model, onInputChange} = this.props;
         if (model) {
-            this.setOwnerStateValues(this.owner, model, [null, e.target.value])
+            this.setOwnerStateValues(model, [null, e.target.value])
         }
         onInputChange && onInputChange(e)
     }

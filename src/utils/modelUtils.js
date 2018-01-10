@@ -15,17 +15,17 @@ const modelUtils = {
         let models = model.split(',');
         let values = [];
         models.forEach((m) => {
-            values.push(_.get(owner.state, m));
+            values.push(_.get(owner.state, _.trim(m)));
         });
         return values;
     },
 
     setStateValues: (owner, model, values) => {
-        let newState = { ...owner.state };
+        let newState = {...owner.state};
         let models = model.split(',');
         values.forEach((v, i) => {
             if (v != null && models.length > i) {
-                _.set(newState, models[i], v);
+                _.set(newState, _.trim(models[i]), v);
             }
         });
         owner.setState(newState)
