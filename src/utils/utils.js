@@ -57,6 +57,11 @@ const utils = {
         window.bootbox.alert(opt);
     },
 
+    // 关闭弹框
+    close(){
+        $(".modal").modal('hide');
+    },
+
     // 确认弹框
     confirm() {
         let option = {};
