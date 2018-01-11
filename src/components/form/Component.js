@@ -3,8 +3,17 @@ import modelUtils from "../../utils/modelUtils";
 
 export default class Component extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        if (props) {
+            this.form = props.__form__;
+        }
+    }
+
     componentWillMount() {
         this.owner = this._reactInternalInstance._currentElement._owner._instance;
+        // console.log(this)
     }
 
     getOwnerStateValue(model) {

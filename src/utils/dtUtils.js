@@ -64,7 +64,7 @@ const dtUtils = {
 		}
 
 		return `<div class="btn-group">
-			<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<button type="button" class="btn btn-primary btn-flat btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				更多... <span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu dropdown-menu-right">

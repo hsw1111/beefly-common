@@ -20,6 +20,7 @@ import Tab from './components/Tab';
 import Text from './components/form/Text';
 import Field from './components/form/Field';
 import Checkbox from './components/form/Checkbox';
+import Clear from './components/Clear';
 
 import uiLoad from './utils/uiLoad';
 import uiResConfig from './utils/uiResConfig';
@@ -28,7 +29,30 @@ import utils from './utils/utils';
 
 export {
     asyncComponent,
-    Box, Button, Content, DataTable, Form, Input, Modal, Map, MapCity, Select, CitySelect, DateRange, NumberRange, SelectInput,
-    Details, Textarea, Tabs, Tab, Text, Field,Checkbox,
-    uiLoad, uiResConfig, dtUtils, utils
+    Box,
+    Button,
+    Content,
+    DataTable,
+    Form,
+    Input,
+    Modal,
+    Map,
+    MapCity,
+    Select,
+    CitySelect,
+    DateRange,
+    NumberRange,
+    SelectInput,
+    Details,
+    Textarea,
+    Tabs,
+    Tab,
+    Text,
+    Field,
+    Checkbox,
+    Clear,
+    uiLoad,
+    uiResConfig,
+    dtUtils,
+    utils
 }
