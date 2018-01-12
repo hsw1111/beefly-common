@@ -1,8 +1,8 @@
 import React from 'react';
 import FormGroup from "./FormGroup";
-import Component from "./Component";
+import Model from "../base/Model";
 
-export default class Textarea extends Component {
+export default class Textarea extends Model {
 
     render() {
         let {placeholder, rows, model, value, width} = this.props;

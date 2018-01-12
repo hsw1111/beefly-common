@@ -1,11 +1,11 @@
 import React from 'react';
-import Component from "./Component";
+import Model from "../base/Model";
 import FormGroup from "./FormGroup";
 
 /**
  * 输入数值范围
  */
-export default class NumberRange extends Component {
+export default class NumberRange extends Model {
 
     render() {
         let {min, max, step, startNumber, endNumber, model} = this.props;

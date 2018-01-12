@@ -1,9 +1,8 @@
 import React from 'react';
-import modelUtils from '../../utils/modelUtils';
 import FormGroup from "./FormGroup";
-import Component from "./Component";
+import Model from "../base/Model";
 
-export default class Input extends Component {
+export default class Input extends Model {
 
     render() {
         let {type, placeholder, value, model, width} = this.props;

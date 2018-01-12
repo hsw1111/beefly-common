@@ -1,9 +1,9 @@
 import React from 'react';
 import _ from 'lodash';
-import Component from "./Component";
+import Model from "../base/Model";
 import FormGroup from "./FormGroup";
 
-export default class Select extends Component {
+export default class Select extends Model {
 
     constructor(props) {
         super(props);

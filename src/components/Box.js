@@ -25,7 +25,7 @@ class BoxFooter extends React.Component {
 export default class Box extends React.Component {
 
     render() {
-        let {title, withBorder, theme} = this.props;
+        let {title, theme} = this.props;
         let themeClass = (theme !== null && theme !== '') ? 'box-' + theme : '';
         return (
             <div className={['box', themeClass].join(' ')}>
@@ -44,8 +44,7 @@ export default class Box extends React.Component {
         let {children} = this.props;
         let body = null;
         React.Children.forEach(children, (child) => {
-            const cType = child.type;
-            if (typeof cType === 'function' && cType.name == 'BoxBody') {
+            if (child && child.type && typeof child.type === 'function' && child.type.name == 'BoxBody') {
                 body = child
             }
         });
@@ -65,8 +64,7 @@ export default class Box extends React.Component {
         let {children} = this.props;
         let footer = null;
         React.Children.forEach(children, (child) => {
-            const cType = child.type;
-            if (typeof cType === 'function' && cType.name == 'BoxFooter') {
+            if (child && child.type && typeof child.type === 'function' && child.type.name == 'BoxFooter') {
                 footer = child
             }
         });

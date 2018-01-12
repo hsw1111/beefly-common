@@ -9,9 +9,11 @@ export default class Tab extends React.Component {
 
 Tab.propTypes = {
     title: React.PropTypes.string,
-}
+};
 
 Tab.defaultProps = {
     title: 'Tab',
-}
+};
+
+Tab.className = 'Tab';
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import _ from 'lodash';
-import Component from "./Component";
+import Model from "../base/Model";
 import FormGroup from "./FormGroup";
 
 /**
  * 分类输入框
  */
-export default class SelectInput extends Component {
+export default class SelectInput extends Model {
 
     constructor(props) {
         super(props);

@@ -21,6 +21,9 @@ import Text from './components/form/Text';
 import Field from './components/form/Field';
 import Checkbox from './components/form/Checkbox';
 import Clear from './components/Clear';
+import Container from './components/Container';
+import Row from './components/Row';
+import Col from './components/Col';
 
 import uiLoad from './utils/uiLoad';
 import uiResConfig from './utils/uiResConfig';
@@ -51,6 +54,9 @@ export {
     Field,
     Checkbox,
     Clear,
+    Container,
+    Row,
+    Col,
     uiLoad,
     uiResConfig,
     dtUtils,

@@ -1,7 +1,7 @@
 import React from 'react';
 import modelUtils from "../../utils/modelUtils";
 
-export default class Component extends React.Component {
+export default class Model extends React.Component {
 
     constructor(props) {
         super(props);

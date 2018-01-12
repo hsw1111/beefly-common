@@ -1,11 +1,11 @@
 import React from 'react';
 import FormGroup from "./FormGroup";
-import Component from "./Component";
+import Model from "../base/Model";
 
 /**
  * 选择日期范围
  */
-export default class DateRange extends Component {
+export default class DateRange extends Model {
 
     render() {
         let {startDate, endDate, model} = this.props;

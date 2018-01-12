@@ -1,11 +1,11 @@
 import React from 'react';
-import Component from "./Component";
+import Model from "../base/Model";
 import FormGroup from "./FormGroup";
 
 /**
  * 单个Checkbox
  */
-export default class Checkbox extends Component {
+export default class Checkbox extends Model {
 
     render() {
         let {checked, value, text, model} = this.props;

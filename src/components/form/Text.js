@@ -1,11 +1,11 @@
 import React from 'react';
 import FormGroup from "./FormGroup";
-import Component from "./Component";
+import Model from "../base/Model";
 
-export default class Text extends Component {
+export default class Text extends Model {
 
     render() {
-        let {value, model} = this.props;
+        let {value, model, children} = this.props;
 
         if (model) {
             value = this.getOwnerStateValue(model);
@@ -13,7 +13,7 @@ export default class Text extends Component {
 
         return (
             <FormGroup {...this.props}>
-                {value}
+                {value || children}
             </FormGroup>
         )
     }

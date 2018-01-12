@@ -1,12 +1,15 @@
 import React from 'react';
 import cs from 'classnames';
-import Button from "./Button";
+import $ from 'jquery';
 
 class ModalBody extends React.Component {
 
+    static className = 'ModalBody';
+
     render() {
+        let {style} = this.props;
         return (
-            <div className="modal-body">
+            <div className="modal-body" style={style}>
                 {this.props.children}
             </div>
         )
@@ -15,6 +18,8 @@ class ModalBody extends React.Component {
 }
 
 class ModalFooter extends React.Component {
+
+    static className = 'ModalFooter';
 
     render() {
         return (
@@ -36,14 +41,14 @@ export default class Modal extends React.Component {
     }
 
     render() {
-        let {theme, title, size, children} = this.props;
+        let {theme, title, size} = this.props;
 
         return (
             <div ref={(e) => this._modal = e} className={cs('modal', 'modal-' + theme, 'fade')}>
-                <div className={cs("modal-dialog", `modal-${size}`)}>
+                <div className={cs("modal-dialog", `modal-${size}`)} style={{height: 500}}>
                     <div className="modal-content">
                         <div className="modal-header">
-                            <button type="button" className="close" onClick={this.cancel.bind(this)}>
+                            <button type="button" className="close" onClick={this.close.bind(this)}>
                                 <span aria-hidden="true">&times;</span></button>
                             <h4 className="modal-title">{title}</h4>
                         </div>
@@ -59,11 +64,8 @@ export default class Modal extends React.Component {
         let {children} = this.props;
         let body = null;
         React.Children.forEach(children, (child) => {
-            const cType = child.type;
-            if (typeof cType === 'function') {
-                if (cType.name == 'ModalBody') {
-                    body = child
-                }
+            if (child && child.type && typeof child.type === 'function' && child.type.className === 'ModalBody') {
+                body = child
             }
         });
 
@@ -82,23 +84,15 @@ export default class Modal extends React.Component {
         let {children} = this.props;
         let footer = null;
         React.Children.forEach(children, (child) => {
-            const cType = child.type;
-            if (typeof cType === 'function' && cType.name == 'ModalFooter') {
+            if (child && child.type && typeof child.type === 'function' && child.type.className === 'ModalFooter') {
                 footer = child
             }
-
         });
 
         if (footer) {
             return footer;
-        } else {
-            return (
-                <Modal.Footer>
-                    <Button theme={'default'} value="取消" onClick={this.cancel.bind(this)}/>
-                    <Button value="确定" onClick={this.ok.bind(this)}/>
-                </Modal.Footer>
-            );
         }
+        return null
     }
 
     componentDidMount() {
@@ -117,28 +111,6 @@ export default class Modal extends React.Component {
         }
     }
 
-    ok() {
-        let {onOk, onHide} = this.props;
-        if (onOk) {
-            onOk();
-        } else {
-            if (onHide) {
-                onHide()
-            }
-        }
-    }
-
-    cancel() {
-        let {onCancel, onHide} = this.props;
-        if (onCancel) {
-            onCancel();
-        } else {
-            if (onHide) {
-                onHide()
-            }
-        }
-    }
-
     show() {
         $(this._modal).modal({
             backdrop: this.props.backdrop,
@@ -149,6 +121,11 @@ export default class Modal extends React.Component {
 
     hide() {
         $(this._modal).modal('hide');
+    }
+
+    close() {
+        let {onHide} = this.props;
+        onHide && onHide()
     }
 }
 

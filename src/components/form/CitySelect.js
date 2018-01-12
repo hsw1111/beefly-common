@@ -3,14 +3,14 @@ import _ from 'lodash';
 import {pinyin} from 'jeselvmo';
 import $ from 'jquery';
 import FormGroup from "./FormGroup";
-import Component from "./Component";
+import Model from "../base/Model";
 
 const letterGroup = ['', 'ABCDE', 'FGHIJ', 'KLMNO', 'PQRST', 'UVWXYZ']
 
 /**
  * 选择城市区域
  */
-export default class CitySelect extends Component {
+export default class CitySelect extends Model {
 
     constructor(props) {
         super(props);
