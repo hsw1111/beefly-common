@@ -27,8 +27,7 @@ import Col from './components/Col';
 
 import uiLoad from './utils/uiLoad';
 import uiResConfig from './utils/uiResConfig';
-import dtUtils from './utils/dtUtils';
-import utils from './utils/utils';
+import utils from './utils';
 
 export {
     asyncComponent,
@@ -59,6 +58,5 @@ export {
     Col,
     uiLoad,
     uiResConfig,
-    dtUtils,
-    utils
+    utils,
 }
