@@ -23,14 +23,21 @@ export default class Select extends Model {
     }
 
     render() {
-        let {model, value} = this.props;
+        let {model, value, width} = this.props;
         let {options} = this.state;
         if (model) {
             value = this.getOwnerStateValue(model);
         }
+
+        // input样式
+        let inputStyle = {};
+        if (width) {
+            inputStyle.width = width;
+        }
+
         return (
             <FormGroup {...this.props}>
-                <select className="form-control" value={value} onChange={this.handleChange.bind(this)}>
+                <select className="form-control" value={value} onChange={this.handleChange.bind(this)} style={inputStyle}>
                     {options.map((op) => (
                         <option key={op.value} value={op.value}>{op.text}</option>
                     ))}
