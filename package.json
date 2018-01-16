@@ -54,6 +54,7 @@
     "codecov": "^2.3.1",
     "create-react-class": "^15.6.2",
     "cross-env": "^5.1.1",
+    "css-loader": "^0.28.7",
     "es3ify": "^0.2.0",
     "eslint": "^4.12.1",
     "eslint-plugin-import": "^2.8.0",
@@ -63,6 +64,8 @@
     "istanbul": "^0.4.4",
     "jsdom": "^11.5.1",
     "mocha": "^3.5.3",
+    "node-sass": "^4.3.0",
+    "postcss-loader": "^2.0.8",
     "nyc": "^11.4.0",
     "rimraf": "^2.6.2",
     "rollup": "^0.43.0",
@@ -70,7 +73,9 @@
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-replace": "^1.2.1",
-    "rollup-plugin-uglify": "^2.0.1"
+    "rollup-plugin-uglify": "^2.0.1",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0"
   },
   "dependencies": {
     "classnames": "^2.2.5",
