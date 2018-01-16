@@ -7,13 +7,13 @@ import cs from 'classnames';
 export default class FormGroup extends React.Component {
 
     render() {
-        let {className, typeName, label, children, validation} = this.props;
+        let {className, typeName, label, children, validation, hasError, errorMessage} = this.props;
         let required = false;
         if (validation) {
             required = validation.required;
         }
         return (
-            <div className={cs("fg", `fg-${typeName}`, className)}>
+            <div className={cs("fg", `fg-${typeName}`, className, {'has-error': hasError})}>
                 <label className="fg-label">
                     {required && <span className={'required'}>*</span>}
                     {label && label + '：'}</label>
@@ -21,9 +21,7 @@ export default class FormGroup extends React.Component {
                     {children}
                     {required && <div className="tooltip bottom">
                         <div className="tooltip-arrow"/>
-                        <div className="tooltip-inner">
-                            {label}不能为空
-                        </div>
+                        <div className="tooltip-inner">{errorMessage}</div>
                     </div>}
                 </div>
                 <div className="clear"/>
