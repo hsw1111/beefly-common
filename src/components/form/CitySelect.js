@@ -32,7 +32,6 @@ export default class CitySelect extends Model {
 
     toCitysGroup(citys) {
         let citysGroup = {};
-
         // 首字母分组
         _.forEach(citys, (c) => {
             let firstLetterGroup = '';

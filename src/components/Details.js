@@ -7,7 +7,7 @@ export default class Details extends React.Component {
 
     render() {
         let {list, cols} = this.props;
-
+        
         if(cols > 1){
             list = _.chunk(list, 2);
         }

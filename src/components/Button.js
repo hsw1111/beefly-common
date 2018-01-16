@@ -1,7 +1,7 @@
 import React from 'react';
 import cs from 'classnames';
-import FormGroup from "./form/FormGroup";
-import Component from "./base/Model";
+// import FormGroup from "./form/FormGroup";
+// import Component from "./base/Model";
 
 export default class Button extends React.Component {
 
